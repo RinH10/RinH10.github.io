@@ -29,7 +29,7 @@ rinhuang@uw.edu
 **“Engaging with Cybernetics.”** – Roundtable Speaker, *History of Science Society (HSS)*  
   *New Orleans, LA, United States. Nov 13–15, 2025.*
 
-**“paper title placeholder”** – Primary Panel Organizer and Presenter, *Infrastructure as the Boundary Media/Medium, Society of Social Studies of Science (4S)*  
+**“Paper Title Placeholder Here!”** – Primary Panel Organizer and Presenter, *Infrastructure as the Boundary Media/Medium, Society of Social Studies of Science (4S)*  
   *Seattle, WA, United States. Sept 3–7, 2025.*
 
 **“The Pervasive Images: Airport Security, Imaging Infrastructure, and Biometric Privacy in China.”** – Presenter, *Cultural Politics of Computational Images*, *Global Mediations Lab, CMS/W, MIT*  
