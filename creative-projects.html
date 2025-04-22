@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Creative Projects</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      background-color: white;
+      overflow: auto; /* 允许滚动 */
+      font-family: 'Courier New', monospace;
+    }
+
+    canvas {
+      display: block;
+      position: fixed; /* 固定背景动画 */
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: 0; /* 确保动画在内容后方 */
+    }
+
+    .gallery {
+      position: relative;
+      z-index: 1; /* 确保内容在动画前方 */
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 2rem;
+      color: black;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr); /* 每行两个项目 */
+      gap: 2rem; /* 项目之间的间距 */
+      width: 100%;
+      max-width: 1200px;
+    }
+
+    .gallery-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      overflow: hidden;
+      border: none; /* 移除边框 */
+      border-radius: 0; /* 移除圆角 */
+      background-color: transparent; /* 背景透明 */
+      box-shadow: none; /* 移除阴影 */
+      transition: transform 0.3s ease;
+    }
+
+    .gallery-item:hover {
+      transform: translateY(-5px);
+    }
+
+    .gallery-item img {
+      width: 100%;
+      height: auto;
+      object-fit: cover;
+    }
+
+    .gallery-item h3 {
+      margin: 1rem 0 0; /* 标题与图片的间距 */
+      font-size: 1.5rem; /* 字体大小 */
+      color: black; /* 黑色字体 */
+      font-weight: normal; /* 字重较轻 */
+      text-align: center;
+      background: none; /* 移除背景 */
+      font-family: 'Courier New', monospace; /* 与个人简介一致的字体 */
+    }
+
+    .menu {
+      margin-top: 2rem;
+      display: flex;
+      gap: 1.5rem;
+      flex-wrap: wrap; /* 允许在小屏幕上换行 */
+    }
+
+    .menu-item {
+      text-decoration: none;
+      color: #6495ED; /* Cornflower Blue */
+      font-size: 1rem;
+      font-weight: bold;
+      transition: color 0.3s ease;
+    }
+
+    .menu-item:hover {
+      color: #4169E1; /* Royal Blue */
+    }
+
+    .menu-item:active {
+      color: #27408B; /* Darker Blue */
+    }
+  </style>
+</head>
+<body>
+  <canvas id="matrixCanvas"></canvas>
+
+  <div class="gallery">
+    <h1>Creative Projects</h1>
+    <div class="gallery-grid">
+      <div class="gallery-item">
+        <img src="assets/creative-projects/project1-thumbnail.jpg" alt="Project 1" />
+        <h3>Palimpsest Hall</h3>
+      </div>
+      <div class="gallery-item">
+        <img src="assets/creative-projects/project2-thumbnail.jpg" alt="Project 2" />
+        <h3>Urban Fugue</h3>
+      </div>
+      <div class="gallery-item">
+        <img src="assets/creative-projects/project3-thumbnail.jpg" alt="Project 3" />
+        <h3>Verge Lining: An Oddsey</h3>
+      </div>
+      <div class="gallery-item">
+        <img src="assets/creative-projects/project4-thumbnail.jpg" alt="Project 4" />
+        <h3>Ethics of Viewing</h3>
+      </div>
+    </div>
+    <div class="menu">
+      <a href="index.html" class="menu-item">Home</a>
+      <a href="research.html" class="menu-item">Research</a>
+      <a href="resume" class="menu-item">CV</a>
+      <a href="contact.html" class="menu-item">Contact</a>
+    </div>
+  </div>
+
+  <script>
+    const canvas = document.getElementById("matrixCanvas");
+    const ctx = canvas.getContext("2d");
+
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    const fontSize = 16;
+    const columns = Math.floor(canvas.width / fontSize);
+    const drops = Array(columns).fill(1);
+    const speeds = Array.from({ length: columns }, () => Math.random() * 1 + 0.5); // 减慢速度范围
+
+    function draw() {
+      ctx.fillStyle = "rgba(255, 255, 255, 0.1)";
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      for (let i = 0; i < drops.length; i++) {
+        const text = Math.random() > 0.5 ? "1" : "0";
+        const x = i * fontSize;
+        const y = drops[i] * fontSize;
+
+        const alpha = Math.random() * 0.5 + 0.5; // 透明度范围 0.5 - 1
+        ctx.fillStyle = `rgba(100, 149, 237, ${alpha})`; // 更低饱和度的蓝色 (Cornflower Blue)
+        ctx.font = fontSize + "px monospace";
+
+        ctx.fillText(text, x, y);
+
+        if (y > canvas.height && Math.random() > 0.975) {
+          drops[i] = 0;
+        }
+
+        drops[i] += speeds[i]; // 正常下落
+      }
+    }
+
+    setInterval(draw, 66); // 增加绘制间隔
+
+    window.addEventListener("resize", () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+
+      const newColumns = Math.floor(canvas.width / fontSize);
+      drops.length = newColumns;
+      speeds.length = newColumns;
+      for (let i = 0; i < newColumns; i++) {
+        drops[i] = 1;
+        speeds[i] = Math.random() * 1 + 0.5; // 重新生成减慢的速度
+      }
+    });
+  </script>
+</body>
+</html>

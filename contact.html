@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Contact</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      background-color: white;
+      overflow: auto; /* 允许滚动 */
+      font-family: 'Courier New', monospace;
+    }
+
+    canvas {
+      display: block;
+      position: fixed; /* 固定背景动画 */
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: 0; /* 确保动画在内容后方 */
+    }
+
+    .content {
+      position: relative;
+      z-index: 1; /* 确保内容在动画前方 */
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh; /* 占满视口高度 */
+      color: black;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+
+    p {
+      font-size: 1.2rem;
+      color: #6495ED; /* Cornflower Blue */
+      font-weight: normal;
+    }
+
+    .menu {
+      margin-top: 2rem;
+      display: flex;
+      gap: 1.5rem;
+      flex-wrap: wrap; /* 允许在小屏幕上换行 */
+    }
+
+    .menu-item {
+      text-decoration: none;
+      color: #6495ED; /* Cornflower Blue */
+      font-size: 1rem;
+      font-weight: bold;
+      transition: color 0.3s ease;
+    }
+
+    .menu-item:hover {
+      color: #4169E1; /* Royal Blue */
+    }
+
+    .menu-item:active {
+      color: #27408B; /* Darker Blue */
+    }
+  </style>
+</head>
+<body>
+  <canvas id="matrixCanvas"></canvas>
+
+  <div class="content">
+    <h1>Contact</h1>
+    <p>rinhuang[at]uw.edu</p>
+    <div class="menu">
+      <a href="index.html" class="menu-item">Home</a>
+      <a href="research.html" class="menu-item">Research</a>
+      <a href="creative-projects.html" class="menu-item">Creative Projects</a>
+      <a href="resume" class="menu-item">CV</a>
+    </div>
+  </div>
+
+  <script>
+    const canvas = document.getElementById("matrixCanvas");
+    const ctx = canvas.getContext("2d");
+
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    const fontSize = 16;
+    const columns = Math.floor(canvas.width / fontSize);
+    const drops = Array(columns).fill(1);
+    const speeds = Array.from({ length: columns }, () => Math.random() * 1 + 0.5); // 减慢速度范围
+
+    function draw() {
+      ctx.fillStyle = "rgba(255, 255, 255, 0.1)";
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      for (let i = 0; i < drops.length; i++) {
+        const text = Math.random() > 0.5 ? "1" : "0";
+        const x = i * fontSize;
+        const y = drops[i] * fontSize;
+
+        const alpha = Math.random() * 0.5 + 0.5; // 透明度范围 0.5 - 1
+        ctx.fillStyle = `rgba(100, 149, 237, ${alpha})`; // 更低饱和度的蓝色 (Cornflower Blue)
+        ctx.font = fontSize + "px monospace";
+
+        ctx.fillText(text, x, y);
+
+        if (y > canvas.height && Math.random() > 0.975) {
+          drops[i] = 0;
+        }
+
+        drops[i] += speeds[i]; // 正常下落
+      }
+    }
+
+    setInterval(draw, 66); // 增加绘制间隔
+
+    window.addEventListener("resize", () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+
+      const newColumns = Math.floor(canvas.width / fontSize);
+      drops.length = newColumns;
+      speeds.length = newColumns;
+      for (let i = 0; i < newColumns; i++) {
+        drops[i] = 1;
+        speeds[i] = Math.random() * 1 + 0.5; // 重新生成减慢的速度
+      }
+    });
+  </script>
+</body>
+</html>
