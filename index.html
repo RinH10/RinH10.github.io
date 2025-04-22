@@ -58,6 +58,7 @@
       margin-top: 2rem;
       display: flex;
       gap: 1.5rem;
+      flex-wrap: wrap; /* 允许在小屏幕上换行 */
     }
 
     .menu-item {
@@ -74,6 +75,52 @@
 
     .menu-item:active {
       color: #27408B; /* Darker Blue */
+    }
+
+    /* 响应式布局 */
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 2rem;
+      }
+
+      h2 {
+        font-size: 1.2rem;
+      }
+
+      p {
+        font-size: 0.9rem;
+      }
+
+      .menu {
+        gap: 1rem;
+      }
+
+      .menu-item {
+        font-size: 0.9rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      h1 {
+        font-size: 1.5rem;
+      }
+
+      h2 {
+        font-size: 1rem;
+      }
+
+      p {
+        font-size: 0.8rem;
+      }
+
+      .menu {
+        flex-direction: column; /* 小屏幕上垂直排列菜单 */
+        gap: 0.5rem;
+      }
+
+      .menu-item {
+        font-size: 0.8rem;
+      }
     }
   </style>
 </head>
