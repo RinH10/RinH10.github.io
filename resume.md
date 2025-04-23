@@ -1,4 +1,17 @@
 # Rin Yilin Huang (they/she)  
+
+![Title Page](https://raw.githubusercontent.com/RinH10/RinH10.github.io/main/assets/creative-projects/project3-thumbnail.jpg)
+
+>  <br>
+> What awaits for us in the place where you’re going, Selim?<br>
+>What does the place where we’ll all go look like? <br>
+>Mountains or cliffs, policemen or soldiers, <br>
+>We never quailed.<br>
+>All I can see is the sea, now, the endless sea.<br>
+> <br>
+
+<br>
+
 **Department of Cinema and Media Studies**  
 University of Washington, Seattle  
 rinhuang@uw.edu  
